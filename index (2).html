@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Iftekhar Alam</title>
+<meta name="description" content="Iftekhar Alam, Ph.D. student at Louisiana State University working on forage quality, NIR spectroscopy, UAV remote sensing, and machine learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate: #243B40;      /* top bar, hero, footer */
+    --slate-deep: #1B2D31;
+    --maroon: #8C2F2F;     /* accents, links */
+    --ink: #1F2A2C;
+    --muted: #55625F;
+    --bg: #FFFFFF;
+    --bg-alt: #F3F5F4;
+    --rule: #DDE2E0;
+    --on-dark: #F2F5F4;
+    --head: "Fira Sans", "Segoe UI", system-ui, sans-serif;
+    --body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+    color-scheme: light;
+    box-sizing: border-box;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --maroon: #E08A84; --ink: #E6ECEA; --muted: #A3B0AD;
+      --bg: #151E20; --bg-alt: #1B2629; --rule: #2E3B3E;
+      color-scheme: dark;
+    }
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1.15rem; line-height: 1.65; }
+  a { color: var(--maroon); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--maroon); outline-offset: 3px; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 78rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Top bar */
+  .topbar { background: var(--slate); color: var(--on-dark); padding-top: env(safe-area-inset-top, 0px); }
+  .topbar .wrap { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 0.3rem 1.75rem; padding-top: 0.85rem; padding-bottom: 0.85rem; font-family: var(--head); font-weight: 500; font-size: 0.98rem; }
+  .topbar a { color: var(--on-dark); }
+
+  /* Site header + nav */
+  .site-head { padding: 1.75rem 0 1.25rem; }
+  .site-name { font-family: var(--head); font-weight: 700; font-size: 2rem; margin: 0; line-height: 1.2; color: var(--ink); }
+  .tagline { font-family: var(--head); font-weight: 500; font-size: 0.88rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0.3rem 0 1.4rem; }
+  nav.main ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 2.2rem; }
+  nav.main a { font-family: var(--head); font-weight: 500; font-size: 1.15rem; color: var(--ink); }
+  nav.main a:hover { color: var(--maroon); text-decoration: none; }
+
+  /* Hero band */
+  .hero { position: relative; overflow: hidden; background: var(--slate); color: var(--on-dark); padding: 5.5rem 0 5rem; }
+  .hero svg.contours { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .hero svg.contours ellipse { fill: none; stroke: rgba(255,255,255,0.09); stroke-width: 1.4; }
+  .hero .wrap { position: relative; }
+  .crumb { font-family: var(--head); font-weight: 600; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.75rem; }
+  .crumb span { opacity: 0.6; margin: 0 0.6rem; }
+  .hero h1 { font-family: var(--head); font-weight: 600; font-size: clamp(2.8rem, 8vw, 5.6rem); line-height: 1.05; margin: 0; letter-spacing: -0.01em; }
+
+  /* Sections */
+  section { padding: 5rem 0; }
+  section.alt { background: var(--bg-alt); }
+  h2 { font-family: var(--head); font-weight: 600; font-size: 2.4rem; line-height: 1.2; margin: 0 0 2.5rem; display: inline-block; padding-bottom: 1rem; border-bottom: 4px solid var(--maroon); color: var(--ink); }
+  h3 { font-family: var(--head); font-weight: 600; font-size: 1.3rem; line-height: 1.35; margin: 0 0 0.5rem; color: var(--ink); }
+  p { margin: 0 0 1.1rem; }
+  .when { font-family: var(--head); font-weight: 500; font-size: 0.98rem; color: var(--muted); margin: 0 0 0.5rem; }
+  .meta { color: var(--muted); margin: 0; }
+
+  /* Intro (photo + details) */
+  .intro { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start; }
+  @media (min-width: 860px) { .intro { grid-template-columns: 22rem 1fr; gap: 4rem; } }
+  .photo { aspect-ratio: 4 / 5; background: var(--slate); color: var(--on-dark); display: grid; place-items: center; font: 600 4.5rem var(--head); overflow: hidden; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .intro h2.role { border: 0; padding: 0; margin: 0 0 1.25rem; font-size: 2.1rem; }
+  .facts { list-style: none; padding: 0; margin: 0 0 1.75rem; }
+  .facts li { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem 0.7rem; margin: 0.55rem 0; }
+  .facts svg { width: 1.15rem; height: 1.15rem; flex: none; stroke: var(--muted); fill: none; stroke-width: 1.6; }
+  .sep { color: var(--rule); }
+  button.copy { font: 400 0.95rem var(--body); background: var(--bg); color: var(--ink); border: 1px solid var(--rule); padding: 0.2rem 0.75rem; cursor: pointer; }
+  button.copy:hover { border-color: var(--muted); }
+
+  /* Lists of entries */
+  .entries > div { padding: 1.75rem 0; border-top: 1px solid var(--rule); }
+  .entries > div:first-child { border-top: 0; padding-top: 0; }
+  .entries .desc { color: var(--muted); margin: 0.35rem 0 0; }
+
+  /* Grids */
+  .grid3 { display: grid; grid-template-columns: 1fr; gap: 2.5rem 2.5rem; }
+  @media (min-width: 720px) { .grid3 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
+  .grid3 p { color: var(--muted); margin: 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr; gap: 2.5rem 3rem; }
+  @media (min-width: 860px) { .grid2 { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Skills */
+  .skillgrid { display: grid; grid-template-columns: 1fr; gap: 2rem 3rem; }
+  @media (min-width: 860px) { .skillgrid { grid-template-columns: repeat(3, 1fr); } }
+  .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .tags li { background: var(--bg); border: 1px solid var(--rule); padding: 0.15rem 0.7rem; font-size: 1rem; }
+  section.alt .tags li { background: var(--bg); }
+  .members { margin: 2.5rem 0 0; padding-left: 1.2rem; color: var(--muted); }
+
+  /* Gallery */
+  .gallery { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+  .gallery figure { margin: 0; }
+  .gallery .ph { aspect-ratio: 4 / 3; background: var(--bg); border: 1px dashed var(--rule); display: grid; place-items: center; color: var(--muted); font-size: 0.95rem; overflow: hidden; text-align: center; padding: 0.5rem; }
+  .gallery .ph img { width: 100%; height: 100%; object-fit: cover; }
+  .gallery figcaption { color: var(--muted); font-size: 1rem; margin-top: 0.6rem; line-height: 1.45; }
+
+  /* Footer */
+  footer { background: var(--slate-deep); color: var(--on-dark); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  footer a { color: var(--on-dark); }
+</style>
+</head>
+<body>
+
+<!-- ========== EDIT THESE ==========
+  1. Replace YOUR_ links (Google Scholar, ORCID, ResearchGate, LinkedIn)
+  2. Upload your photo as images/profile.jpg
+  3. Upload gallery photos as images/gallery1.jpg ... gallery6.jpg
+================================== -->
+
+<div class="topbar">
+  <div class="wrap">
+    <a href="mailto:aiftekhar@agcenter.lsu.edu">aiftekhar@agcenter.lsu.edu</a>
+    <a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a>
+    <a href="https://orcid.org/YOUR_ORCID">ORCID</a>
+    <a href="https://github.com/iftekharalam50">GitHub</a>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap">
+    <p class="site-name">Iftekhar Alam</p>
+    <p class="tagline">Forage Quality · NIR Spectroscopy · Remote Sensing · Machine Learning</p>
+    <nav class="main" aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#presentations">Presentations</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <svg class="contours" viewBox="0 0 1400 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g transform="translate(1180 220)">
+      <ellipse rx="120" ry="80"/><ellipse rx="200" ry="135"/><ellipse rx="285" ry="190"/>
+      <ellipse rx="370" ry="245"/><ellipse rx="460" ry="300"/><ellipse rx="560" ry="360"/>
+    </g>
+    <g transform="translate(260 320) rotate(-8)">
+      <ellipse rx="110" ry="70"/><ellipse rx="190" ry="120"/><ellipse rx="280" ry="175"/><ellipse rx="380" ry="235"/>
+    </g>
+    <g transform="translate(720 60) rotate(6)">
+      <ellipse rx="160" ry="60"/><ellipse rx="260" ry="105"/><ellipse rx="380" ry="160"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <p class="crumb">Louisiana State University<span>›</span>Plant, Environmental &amp; Soil Sciences</p>
+    <h1>Iftekhar Alam</h1>
+  </div>
+</div>
+
+<main>
+  <section id="about">
+    <div class="wrap intro">
+      <div class="photo">
+        <img src="images/profile.jpg" alt="Portrait of Iftekhar Alam" onerror="this.parentNode.textContent='IA';">
+      </div>
+      <div>
+        <h2 class="role">Ph.D. Student &amp; Graduate Research Assistant</h2>
+        <ul class="facts">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>
+            Louisiana State University · LSU AgCenter
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13"/><path d="M8 7V4h8v3M3 12h18"/></svg>
+            Forage Quality <span class="sep">|</span> NIR Spectroscopy <span class="sep">|</span> UAV Remote Sensing <span class="sep">|</span> Machine Learning
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14"/><path d="M3 6l9 7 9-7"/></svg>
+            <a href="mailto:aiftekhar@agcenter.lsu.edu" id="email">aiftekhar@agcenter.lsu.edu</a>
+            <button class="copy" type="button" data-copy="aiftekhar@agcenter.lsu.edu">Copy</button>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg>
+            <a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a>
+            <span class="sep">|</span>
+            <a href="https://orcid.org/YOUR_ORCID">ORCID</a>
+            <span class="sep">|</span>
+            <a href="https://www.researchgate.net/profile/YOUR_PROFILE">ResearchGate</a>
+          </li>
+        </ul>
+        <p>I am a Ph.D. student in Plant, Environmental, and Soil Sciences at Louisiana State University and a Graduate Research Assistant in the LSU AgCenter Forage Quality Laboratory, advised by Dr. Kun-Jun Han.</p>
+        <p>My research focuses on making forage quality assessment faster and more scalable. I combine laboratory wet chemistry, near-infrared spectroscopy, UAV multispectral imaging, and machine learning to predict the nutritive value of forages across working farms in Louisiana.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="alt">
+    <div class="wrap">
+      <h2>Education</h2>
+      <div class="entries">
+        <div>
+          <p class="when">Present</p><!-- e.g. "August 2025 – Present · Expected completion May 2029" -->
+          <h3>Ph.D., Plant, Environmental, and Soil Sciences</h3>
+          <p class="meta">Louisiana State University, Baton Rouge, Louisiana, USA · Advisor: Dr. Kun-Jun Han</p>
+        </div>
+        <div>
+          <p class="when">2016 – 2022</p>
+          <h3>B.Sc. in Agriculture (Hons.)</h3>
+          <p class="meta">Sher-e-Bangla Agricultural University, Dhaka, Bangladesh</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <h2>Research Interests</h2>
+      <div class="grid3">
+        <div><h3>Forage Quality Analysis</h3><p>Wet chemistry for NDF, ADF, ADL, crude protein, ether extract, ash, and IVTDMD as the reference data behind every prediction model.</p></div>
+        <div><h3>NIRS Calibration</h3><p>Near-infrared spectroscopy calibration models that predict forage nutritive value quickly, without full laboratory analysis.</p></div>
+        <div><h3>UAV Remote Sensing</h3><p>Multispectral drone imagery to estimate forage energy and total digestible nutrients (TDN) at the field scale.</p></div>
+        <div><h3>Machine Learning for Forage Prediction</h3><p>Regression models linking spectral data to forage quality, and testing how well they transfer between farms and seasons.</p></div>
+        <div><h3>Pasture Soil Health</h3><p>Connecting soil, drone, and biomass data to understand what drives pasture productivity.</p></div>
+        <div><h3>Alternative Forage Systems</h3><p>Evaluating small grains as alternatives to annual ryegrass in Louisiana forage production.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications" class="alt">
+    <div class="wrap">
+      <h2>Publications</h2>
+      <div class="entries">
+        <div>
+          <p class="when">2025 · Extension article</p>
+          <h3>Evaluation of Small Grain Forage as an Alternative to Annual Ryegrass</h3>
+          <p class="meta">Shovo, I. A., &amp; Han, K.-J. · <em>Louisiana Forage Farmer</em>, Vol. 40, No. 3 (Summer 2025) · <a href="https://www.researchgate.net/">ResearchGate</a></p>
+        </div>
+      </div>
+      <p class="meta" style="margin-top:2rem"><em>Additional publications will be added as they become available.</em></p>
+    </div>
+  </section>
+
+  <section id="presentations">
+    <div class="wrap">
+      <h2>Conference Presentations</h2>
+      <!-- Copy one <div> block per presentation and fill in the details -->
+      <div class="entries">
+        <div><p class="when">2024 · City, State · Poster</p><h3>Presentation title 1</h3><p class="meta">Authors · ASA, CSSA, SSSA International Annual Meeting</p></div>
+        <div><p class="when">2024 · City, State · Poster</p><h3>Presentation title 2</h3><p class="meta">Authors · ASA, CSSA, SSSA International Annual Meeting</p></div>
+        <div><p class="when">2024 · City, State · Poster</p><h3>Presentation title 3</h3><p class="meta">Authors · ASA, CSSA, SSSA International Annual Meeting</p></div>
+        <div><p class="when">2024 · City, State · Poster</p><h3>Presentation title 4</h3><p class="meta">Authors · ASA, CSSA, SSSA International Annual Meeting</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="awards" class="alt">
+    <div class="wrap">
+      <h2>Awards &amp; Honors</h2>
+      <div class="entries">
+        <div><p class="when">Year</p><h3>Award name</h3><p class="meta">Awarding organization. One sentence about what it was for.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <h2>Research &amp; Field Experience</h2>
+      <div class="entries">
+        <div>
+          <p class="when">Present · Baton Rouge, Louisiana</p>
+          <h3>Graduate Research Assistant, Forage Quality Laboratory</h3>
+          <p class="desc">LSU AgCenter. Run forage wet chemistry analyses, develop NIRS calibration models, collect UAV multispectral data, and build machine learning models to predict forage quality across Louisiana farm sites, including Bayou Sarah, Simon Hay, and JP Land.</p>
+        </div>
+        <div class="grid2">
+          <div>
+            <p class="when">Louisiana</p>
+            <h3>Macon Ridge Research Station</h3>
+            <p class="desc">LSU AgCenter. Field sampling and soil nutrient cycling research.</p>
+          </div>
+          <div>
+            <p class="when">Louisiana</p>
+            <h3>Red River Research Station</h3>
+            <p class="desc">LSU AgCenter. Field sampling and soil nutrient cycling research.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="alt">
+    <div class="wrap">
+      <h2>Skills &amp; Tools</h2>
+      <div class="skillgrid">
+        <div><h3>Programming &amp; Analysis</h3><ul class="tags"><li>R</li><li>Python</li><li>Machine learning regression</li><li>Statistical modeling</li><li>Spatial analysis</li><li>Time-series analysis</li></ul></div>
+        <div><h3>Spectroscopy &amp; Remote Sensing</h3><ul class="tags"><li>NIRS calibration</li><li>UAV multispectral imaging</li><li>Vegetation indices</li><li>GIS</li></ul></div>
+        <div><h3>Laboratory &amp; Field</h3><ul class="tags"><li>NDF / ADF / ADL</li><li>Crude protein</li><li>Ether extract</li><li>Ash</li><li>IVTDMD</li><li>Visual MINTEQ</li><li>Forage &amp; soil sampling</li></ul></div>
+      </div>
+      <h3 style="margin-top:2.5rem">Professional Memberships</h3>
+      <ul class="members" style="margin-top:0.5rem">
+        <li>American Society of Agronomy (ASA), Graduate Student Member</li>
+        <li>Crop Science Society of America (CSSA), Graduate Student Member</li>
+        <li>Soil Science Society of America (SSSA), Graduate Student Member</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <h2>Gallery</h2>
+      <!-- Upload photos to an "images" folder with these exact names, then edit the captions -->
+      <div class="gallery">
+        <figure><div class="ph"><img src="images/gallery1.jpg" alt="Flying a multispectral drone over a pasture" onerror="this.replaceWith('Add images/gallery1.jpg')"></div><figcaption>Flying a multispectral drone over a pasture</figcaption></figure>
+        <figure><div class="ph"><img src="images/gallery2.jpg" alt="Forage sampling at a Louisiana farm site" onerror="this.replaceWith('Add images/gallery2.jpg')"></div><figcaption>Forage sampling at a Louisiana farm site</figcaption></figure>
+        <figure><div class="ph"><img src="images/gallery3.jpg" alt="Lab work in the Forage Quality Laboratory" onerror="this.replaceWith('Add images/gallery3.jpg')"></div><figcaption>Lab work in the LSU AgCenter Forage Quality Laboratory</figcaption></figure>
+        <figure><div class="ph"><img src="images/gallery4.jpg" alt="Poster presentation" onerror="this.replaceWith('Add images/gallery4.jpg')"></div><figcaption>Poster presentation, ASA-CSSA-SSSA Annual Meeting 2024</figcaption></figure>
+        <figure><div class="ph"><img src="images/gallery5.jpg" alt="Scanning forage samples for NIRS" onerror="this.replaceWith('Add images/gallery5.jpg')"></div><figcaption>Scanning forage samples for NIRS calibration</figcaption></figure>
+        <figure><div class="ph"><img src="images/gallery6.jpg" alt="With advisor Dr. Kun-Jun Han" onerror="this.replaceWith('Add images/gallery6.jpg')"></div><figcaption>With my advisor, Dr. Kun-Jun Han</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="alt">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="grid2">
+        <p>School of Plant, Environmental, and Soil Sciences<br>Louisiana State University<br>Baton Rouge, Louisiana</p>
+        <div>
+          <p>Email: <a href="mailto:aiftekhar@agcenter.lsu.edu">aiftekhar@agcenter.lsu.edu</a> <button class="copy" type="button" data-copy="aiftekhar@agcenter.lsu.edu">Copy</button></p>
+          <p>
+            <a href="https://github.com/iftekharalam50">GitHub</a> ·
+            <a href="https://orcid.org/YOUR_ORCID">ORCID</a> ·
+            <a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a> ·
+            <a href="https://www.researchgate.net/profile/YOUR_PROFILE">ResearchGate</a> ·
+            <a href="https://www.linkedin.com/in/YOUR_PROFILE">LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Iftekhar Alam</span>
+    <a href="mailto:aiftekhar@agcenter.lsu.edu">aiftekhar@agcenter.lsu.edu</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('button.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      try {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = 'Copied';
+          setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+        });
+      } catch (e) { window.location.href = 'mailto:' + text; }
+    });
+  });
+</script>
+</body>
+</html>
